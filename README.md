@@ -5,7 +5,10 @@ habit-tracker is a small app that can be used to keep track of a number of habit
 ## Installation
 
 Download all the files of the app and make sure to have them in the same folder.
-Before using the app for the first time run the database_setup.py file to vreate the database for habits to be stored in. This database comes with pre-existing sample data.
+
+Before using the app for the first time run the database_setup.py file to create the database for habits to be stored in.
+
+This database comes with pre-existing sample data.
 
 ## Usage
 
@@ -30,4 +33,4 @@ Given the following habits:
 2. Take a shower
 3. Drink 2 liters of water
 
-To get a statistical overview about the habits "Go for a walk", type in "ov 1".
+To get a statistical overview about the habit "Go for a walk", type in "ov 1".
