@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta, date
 import sqlite3
 
+#initialize database
 sql_connect = sqlite3.connect("habit-data.db")
 cursor = sql_connect.cursor()
 
@@ -100,7 +101,7 @@ def hardest_streak(habits):
     loss_count = dict(sorted(loss_count.items(), reverse=True, key=lambda item: item[1]))
 
     hardest_habit = list(loss_count.keys())[0]
-    losses = list(loss_count.items())[0]
+    losses = list(loss_count.items())[0][1]
     return hardest_habit, losses
     
 def create_habit(name):
@@ -155,11 +156,13 @@ class Habit:
         self.completed_today = completed_today
         
     def complete(self):
+        'completes streak for today and adds 1'
         self.streak+=1
         self.last_completed=get_timestamp()
         self.completed_today=True
     
     def check_streak(self):
+        'checks if streak has been lost today'
         today = date.today()
         yesterday = today - timedelta(days = 1)
         if self.last_completed == "None":
@@ -178,6 +181,7 @@ class Habit:
         self.last_check = str(get_timestamp())
         
     def lose_streak(self):
+        'marks streak as lost, inserts entry into past streaks table'
         if self.streak != 0:
             self.streak = 0
             self.last_completed = None
@@ -190,6 +194,7 @@ class Habit:
             print(f"You didn't {self.name} {timing} and lost your streak :/")
         
     def info(self):
+        'prints all data on the habit'
         print(f"""Habit: {self.name}
         Streak: {self.streak}
         Frequency: {self.frequency}
@@ -197,6 +202,7 @@ class Habit:
         Created on: {self.creation}""")
         
     def delete(self, habits, stats_delete):
+        'deletes a habit'
         query = f'DELETE FROM habits WHERE name="{self.name}"'
         cursor.execute(query)
         # delete stats if required

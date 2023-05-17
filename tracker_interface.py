@@ -27,6 +27,7 @@ page_help={"home":"""Commands:
 exit_message="Session completed. See you next time."
 
 def input_loop(one_word_commands, two_word_commands):
+    'runs in a loop until input is a recognized command'
     while True:
         command = input("What would you like to do? ").lower()
         if command in one_word_commands:  
@@ -40,6 +41,7 @@ def input_loop(one_word_commands, two_word_commands):
     return command
 
 def validity_test(number, habit_list):
+    'tests if input number for a command is a valid input'
     try:
         habit_number = int(number)
         invalid = False
@@ -53,6 +55,7 @@ def validity_test(number, habit_list):
     return habit_number, invalid
 
 def main():
+    'main loop that starts the program and opens the home page'
     # connect to database and load existing habits
     habits = tf.load_habits()
 
