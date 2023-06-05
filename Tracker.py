@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, date
 import sqlite3
 
 #initialize database
-sql_connect = sqlite3.connect("habit-data.db")
+sql_connect = sqlite3.connect("habit_data.db")
 cursor = sql_connect.cursor()
 
 # functions outside the habit class

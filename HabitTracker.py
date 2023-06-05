@@ -1,5 +1,13 @@
+# create database if necessary
+import os
+
+if not "habit_data.db" in os.listdir():
+    print("test")
+    with open("database_setup.py") as f:
+        exec(f.read())
+
 # Interface
-import TrackerFunctions as tf
+import Tracker as tf
 
 page_help={"home":"""Commands:
             'stats' to open the statistics page
@@ -189,5 +197,5 @@ def manage_page(habits, list_commands = False):
     elif command[0] == "view":
         tf.view_all(command[1], habits)
         manage_page(habits)
-        
+
 main()
