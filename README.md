@@ -6,13 +6,13 @@ habit-tracker is a small app that can be used to keep track of a number of habit
 
 Download all the files of the app and make sure to have them in the same folder.
 
-Before using the app for the first time run the database_setup.py file to create the database for habits to be stored in.
+When using the app for the first time, the database for habits to be stored in will be created automatically.
 
 This database comes with pre-existing sample data.
 
 ## Usage
 
-To start the app, run tracker_interface.py.
+To start the app, run HabitTracker.py.
 
 This will start up the home page of the app.
 
