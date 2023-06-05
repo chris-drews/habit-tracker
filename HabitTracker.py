@@ -7,7 +7,7 @@ if not "habit_data.db" in os.listdir():
         exec(f.read())
 
 # Interface
-import Tracker as tf
+import tracker as tf
 
 page_help={"home":"""Commands:
             'stats' to open the statistics page
@@ -34,10 +34,13 @@ page_help={"home":"""Commands:
 
 exit_message="Session completed. See you next time."
 
-def input_loop(one_word_commands, two_word_commands):
+def input_loop(one_word_commands, two_word_commands, special_commands=[]):
     'runs in a loop until input is a recognized command'
     while True:
-        command = input("What would you like to do? ").lower()
+        command = input("What would you like to do? ")
+        if command.split(" ")[0] in special_commands:
+            command=[command.split(" ")[0], " ".join(command.split(" ")[1:])]
+            break
         if command in one_word_commands:  
             break
         command = command.split(" ")
@@ -80,7 +83,6 @@ def main():
     # Commit changes and end session
     tf.commit_changes(habits)
     tf.sql_connect.close()
-    print("done")
     
 def home_page(habits, list_commands = False):
     print("\n-----Home-----")
@@ -178,7 +180,8 @@ def manage_page(habits, list_commands = False):
             
     # input loop
     command = input_loop(one_word_commands = ["home", "help", "exit"],
-                         two_word_commands = ["create", "delete", "view"])
+                         two_word_commands = ["view"],
+                         special_commands=["create", "delete"])
         
     # command execution
     if command == "help":
@@ -190,9 +193,11 @@ def manage_page(habits, list_commands = False):
     elif command[0] == "create":
         new_habit = tf.create_habit(name = command[1])
         habits.append(new_habit)
+        print("Your habit has been created")
         manage_page(habits)
     elif command[0] == "delete":
-        tf.delete(command[1], habits)
+        tf.delete_habit(command[1], habits)
+        print("Your habit has been deleted")
         manage_page(habits)
     elif command[0] == "view":
         tf.view_all(command[1], habits)

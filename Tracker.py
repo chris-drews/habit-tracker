@@ -108,11 +108,12 @@ def create_habit(name):
     '''creates and returns a new habit'''
     #input loop
     while True:
-        frequency = "Should this be a daily (d) or a weekly (w) streak?"
+        frequency = input("Should this be a daily (d) or a weekly (w) streak?" )
         if frequency in ["d", "w"]:
             break
         else:
             print("Please use 'd' or 'w' as your input")
+    frequency = "daily" if frequency=="d" else "weekly"
     new_habit = Habit(name, frequency = frequency)
     return new_habit
 
@@ -128,7 +129,7 @@ def delete_habit(name, habits):
             else:
                 print("invalid input")
         stats_delete = True if stats_delete == "y" else False
-        habit.delete(stats_delete)
+        habit.delete(habits, stats_delete)
     else:
         print("Can't delete a habit that doesn't exist")
         
