@@ -6,14 +6,18 @@ habit-tracker is a small app that can be used to keep track of a number of habit
 
 Download all the files of the app and make sure to have them in the same folder.
 
-Before using the app for the first time run the database_setup.py file to create the database for habits to be stored in.
+When using the app for the first time, the database for habits to be stored in will be created automatically.
 
 This database comes with pre-existing sample data.
 
 ## Usage
 
-To start the app, run tracker_interface.py.
-
+To start the app, run HabitTracker.py by either:
+  1. Starting the file from within the folder.
+  2. Starting the file via the command-line
+```shell
+$ python HabitTracker.py
+```
 This will start up the home page of the app.
 
 Here, the various commands you can input, will be listed and briefly explained.
@@ -24,13 +28,39 @@ For some commands, you will need to clarify the specific habit you are referring
 
 ## Examples
 
+### 1. Exiting the app
 To exit the app you type in "exit".
+```terminal
+What would you like to do? exit
+```
 
-To get to the statistics page (where you can access additional commands) you type in "stats".
+### 2. Creating a new habit
+*Scenario*: You want to create a new daily habit called "Drink 2 liters of water".
+First go to the management page.
+```terminal
+What would you like to do? manage
+```
+Then use the command "create [your habit]"
+```terminal
+What would you like to do? create Drink 2 liters of water
+```
+You will then be asked if this should be a daily or a weekly streak (d for daily in this case).
+```terminal
+Should this be a daily (d) or a weekly (w) streak? d
+```
+Your new habit is now added to the floating habits and will be commited to the database upon exiting the app.
 
-Given the following habits:
-1. Go for a walk
-2. Take a shower
-3. Drink 2 liters of water
+### 3. Getting statistics on a particular habit
+*Scenario*:ou want to get a statistical overview of the habit "Go for a walk".
+First you go to the statistics page.
+```terminal
+What would you like to do? stats
+```
+Then you check the number next to your habit and input the following command (in this case 1).
+```terminal
+1.) Go for a walk
+2.) Take a shower
+3.) Drink 2 liters of water
+What would you like to do? ov 1
+```
 
-To get a statistical overview about the habit "Go for a walk", type in "ov 1".
