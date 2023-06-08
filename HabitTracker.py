@@ -100,7 +100,7 @@ def home_page(habits, list_commands = False):
     
     #input loop
     command = input_loop(one_word_commands = ["stats", "manage", "exit", "help"],
-                         two_word_commands = ["check"])
+                         two_word_commands = ["check", "to complete"])
 
     # Command execution
     if command == "help":

@@ -28,6 +28,7 @@ def create_table():
 def insert_sample_data():
     today = date.today()
     yesterday = today - timedelta(1)
+    day_before_yesterday = today - timedelta(2)
     null_value = None
     
     sql_connect = sqlite3.connect("habit_data.db")
@@ -37,7 +38,7 @@ def insert_sample_data():
     "INSERT INTO habits "
         "(name, frequency, streak, creation, last_completed, last_check) "
     "VALUES "
-        f"('Go for a walk', 'daily', 6, '2023-02-04 08:17:46', '{yesterday} 08:43:13', '{yesterday} 12:21:43'), "
+        f"('Go for a walk', 'daily', 6, '2023-02-04 08:17:46', '{day_before_yesterday} 08:43:13', '{yesterday} 12:21:43'), "
         f"('Go to the gym', 'weekly', 3, '2023-02-04 08:16:46', '{yesterday} 09:43:13', '{yesterday} 12:21:43'), "
         f"('Take a shower', 'daily', 10, '2023-02-27 20:56:17', '{yesterday} 11:21:43', '{yesterday} 12:21:43'), "
         f"('Go swimming', 'weekly', 0, '2023-03-10 07:26:16', '{null_value}', '{yesterday} 12:21:43'), "

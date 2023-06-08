@@ -146,8 +146,8 @@ def view_all(frequency, habits):
     
 # habit class
 class Habit:
-    def __init__(self, name, frequency = "daily", streak = 0, creation=get_timestamp(),
-                 last_completed="None", last_check="None", completed_today=False):
+    def __init__(self, name, frequency = "daily", streak = 0, creation = get_timestamp(),
+                 last_completed = "None", last_check = "None", completed_today = False):
         self.name = name
         self.frequency = frequency
         self.streak = streak
