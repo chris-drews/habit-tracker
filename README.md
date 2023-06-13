@@ -1,6 +1,6 @@
-# habit-tracker
+# HabitTracker
 
-habit-tracker is a small app that can be used to keep track of a number of habits over time by using the concept of streaks.
+HabitTracker is a small app that can be used to keep track of a number of habits over time by using the concept of streaks.
 
 ## Installation
 
@@ -26,7 +26,17 @@ The program runs as a loop, so after typing in a command, you will get the answe
 
 For some commands, you will need to clarify the specific habit you are referring to. To simplify this, the habits are listed at the beginning of the page with numbers next to them. This way you can type in the numbers instead of writing out the full habit name.
 
-## Examples
+You enter the command right after the question that you are being asked by the program.
+
+## Testing
+To test if the functions of the app are running correctly, navigate to the folder the app files are placed in and use the commandline to run the following:
+```shell
+$ python -m unittest test_habit_app.py
+```
+
+## Usage Examples
+
+#### DISCLAIMER Remember that your input is everything that comes after the question.
 
 ### 1. Exiting the app
 To exit the app you type in "exit".
