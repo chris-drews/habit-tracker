@@ -36,7 +36,8 @@ $ python -m unittest test_habit_app.py
 
 ## Usage Examples
 
-#### Remember that your input is everything that comes after the question.
+#### DISCLAIMER Remember that your input is everything that comes after the question.
+
 ### 1. Exiting the app
 To exit the app you type in "exit".
 ```terminal
