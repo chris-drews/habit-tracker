@@ -64,20 +64,22 @@ def longest_current_streak(habits):
     result=[]
     for habit in habits:
         if habit.streak==max_streak_daily:
-            result+=[f"{habit.name} with a streak of {max_streak_daily}"]
+            result.append([habit.name, max_streak_daily])
+            break
     for habit in habits:
         if habit.streak==max_streak_weekly:
-            result+=[f"{habit.name} with a streak of {max_streak_weekly}"]
+            result.append([habit.name, max_streak_weekly])
+            break
     return result
         
 def longest_all_time_streak(habits):
-    '''returns the longest running streak of all time for weekly and daily habits'''
+    '''returns the longest running streak of all time'''
     query = ("SELECT name,Max(streak) FROM "
              "(SELECT name,streak FROM habits "
              "UNION ALL " #checking both the current streaks and the database of old ones
              "SELECT name,streak FROM past_streaks);")
     result = cursor.execute(query).fetchall()[0]
-    return [0,0] #temporary
+    return result
     
 def hardest_streak(habits):
     '''determines the hardest streak to maintain, by checking which streak has been lost the most often'''
@@ -135,13 +137,14 @@ def delete_habit(name, habits):
         
 def view_all(frequency, habits):
     '''gives an overview of all the habits whose frequency matches the one specified'''
+    habit_list = []
     if frequency in ["all", "daily", "weekly"]:
         for habit in habits:
             if frequency == "all" or habit.frequency == frequency:
-                habit.info()
-                print("\n")
+                habit_list.append(habit)
     else:
         print("Invalid frequency input. Valid: 'all', 'daily', 'weekly'")
+    return habit_list
 
     
 # habit class
@@ -195,12 +198,13 @@ class Habit:
             print(f"You didn't {self.name} {timing} and lost your streak :/")
         
     def info(self):
-        'prints all data on the habit'
-        print(f"""Habit: {self.name}
+        'returns all data on the habit as string'
+        info = (f"""Habit: {self.name}
         Streak: {self.streak}
         Frequency: {self.frequency}
         Last Completed on: {self.last_completed}
         Created on: {self.creation}""")
+        return info
         
     def delete(self, habits, stats_delete):
         'deletes a habit'

@@ -1,10 +1,12 @@
 # create database if necessary
 import os
+import database_setup
 
 if not "habit_data.db" in os.listdir():
-    print("test")
+    database_setup.main("habit_data.db")
+'''if not "habit_data.db" in os.listdir():
     with open("database_setup.py") as f:
-        exec(f.read())
+        exec(f.read())'''
 
 # Interface
 import tracker as tf
@@ -28,7 +30,7 @@ page_help={"home":"""Commands:
             'home' to go back to the home page
             'create [habit]' to create a new habit
             'delete [habit]' to delete a habit
-            'view [all / daily / monthly]' to view all habits of specified period
+            'view [all / daily / weekly]' to view all habits of specified period
             'exit' to end your session
             'help' to reprint instructions\n"""}
 
@@ -147,13 +149,12 @@ def stats_page(habits, list_commands = False):
         print(exit_message)
     elif command == "lcs":
         longest_daily, longest_weekly = tf.longest_current_streak(habits)
-        print(f"Your longest daily streak is {longest_daily}")
-        print(f"Your longest weekly streak is {longest_weekly}")
+        print(f"Your longest daily streak is {longest_daily[0]} with a streak of {longest_daily[1]}")
+        print(f"Your longest weekly streak is {longest_weekly[0]} with a streak of {longest_weekly[1]}")
         stats_page(habits)
     elif command == "las":
-        longest_daily, longest_weekly = tf.longest_all_time_streak(habits)
-        print(f"Your longest daily streak of all time is {longest_daily}")
-        print(f"Your longest weekly streak of all time is {longest_weekly}")
+        longest, streak = tf.longest_all_time_streak(habits)
+        print(f"Your longest streak of all time is {longest} with a streak of {streak}")
         stats_page(habits)
     elif command == "hardest":
         hardest_to_maintain, losses = tf.hardest_streak(habits)
@@ -164,7 +165,8 @@ def stats_page(habits, list_commands = False):
                                                habit_list = habits)
         if not invalid:
             habit_to_check = habits[habit_number - 1]  #subtract one because counting began at 1
-            habit_to_check.info()
+            print(habit_to_check.info())
+
         stats_page(habits)
             
 def manage_page(habits, list_commands = False):
@@ -200,7 +202,10 @@ def manage_page(habits, list_commands = False):
         print("Your habit has been deleted")
         manage_page(habits)
     elif command[0] == "view":
-        tf.view_all(command[1], habits)
+        habit_list=tf.view_all(command[1], habits)
+        #print(habit_list)
+        for habit in habit_list:
+            print(habit.info(),"\n")
         manage_page(habits)
 
 main()
