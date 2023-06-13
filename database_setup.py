@@ -2,8 +2,8 @@
 import sqlite3
 from datetime import timedelta, date
 
-def create_table():
-    sql_connect = sqlite3.connect("habit_data.db")
+def create_table(database_name):
+    sql_connect = sqlite3.connect(database_name)
     cursor = sql_connect.cursor()
     main_table_query = ("CREATE TABLE habits("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -25,13 +25,13 @@ def create_table():
     sql_connect.commit()
     sql_connect.close()
 
-def insert_sample_data():
+def insert_sample_data(database_name):
     today = date.today()
     yesterday = today - timedelta(1)
     day_before_yesterday = today - timedelta(2)
     null_value = None
     
-    sql_connect = sqlite3.connect("habit_data.db")
+    sql_connect = sqlite3.connect(database_name)
     cursor = sql_connect.cursor()
     #insert example data for habit table
     insert_query = (
@@ -75,5 +75,7 @@ def insert_sample_data():
     sql_connect.commit()
     sql_connect.close()
 
-create_table()
-insert_sample_data()
+def main(database_name):
+    
+    create_table(database_name)
+    insert_sample_data(database_name)
