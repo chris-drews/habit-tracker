@@ -61,7 +61,7 @@ Should this be a daily (d) or a weekly (w) streak? d
 Your new habit is now added to the floating habits and will be commited to the database upon exiting the app.
 
 ### 3. Getting statistics on a particular habit
-*Scenario*:ou want to get a statistical overview of the habit "Go for a walk".
+*Scenario*: You want to get a statistical overview of the habit "Go for a walk".
 First you go to the statistics page.
 ```terminal
 What would you like to do? stats
